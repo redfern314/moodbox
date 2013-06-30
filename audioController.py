@@ -10,7 +10,7 @@ class AudioController:
     color = ""
 
     def selectPlaylist(self, playlist_color):
-        Playlist.color = playlist_color  
+        self.color = playlist_color  
 
     def __init__(self):
         mixer.init()
@@ -23,7 +23,7 @@ class AudioController:
      # new playlist is selected
      # song ends
     def songSelect(self):
-        path = "playlists/" + Playlist.color 
+        path = "playlists/" + self.color 
         #song_selection = random.randint(1,3)
         song_selection = "1s"
         #full_file_name = path + "/" + str(song_selection) + ".mp3"
@@ -38,15 +38,24 @@ class AudioController:
         #data = self.mf.read(frame_count)
         #return (data, pyaudio.paContinue)
 
+    def stop(self):
+        mixer.music.fadeout(500)
 
     def play(self, filename):
+        if mixer.music.get_busy():
+            self.stop()
         mixer.music.load(filename)
-        mixer.music.set_endevent(USEREVENT)
         mixer.music.play()
 
 
 
-    
+def run(queue,moods):
+    if not queue.empty():
+        newmood = queue.get()
+        playlist.selectPlaylist(newmood)
+        playlist.selectSong()
+    elif not mixer.music.get_busy():
+        playlist.selectSong()
 
 
 

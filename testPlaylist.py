@@ -1,9 +1,11 @@
-from selectPlaylist import * 
+from pygame import *
+from audioController import * 
 
 print "test"
 
-list = Playlist()
+list = AudioController()
 list.selectPlaylist("red")
 list.songSelect()
-while (1):
+
+while mixer.music.get_busy():
     pass
