@@ -5,7 +5,7 @@ import os, sys
 import wave
 from pygame import *
 
-class audioController:
+class AudioController:
     'Class for playlist handling'
     color = ""
 
