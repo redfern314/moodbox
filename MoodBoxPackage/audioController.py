@@ -13,6 +13,7 @@ class AudioController:
 
     def __init__(self):
         mixer.init()
+	mixer.music.set_volume(1.0)
 	self.color = ""
         os.environ["SDL_VIDEODRIVER"]="dummy"
         display.init()

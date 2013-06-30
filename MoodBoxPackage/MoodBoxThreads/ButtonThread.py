@@ -33,7 +33,7 @@ class ButtonThread(threading.Thread):
             else:
                 if(self.startTime):
                     index = random.randint(0,len(self.moods)-1)
-                    self.queue.put(self.moods.keys()[index])
+                    self.queue.put((self.moods.keys()[index],True))
                     print 'Button Up!'
                 self.startTime = None
         
@@ -42,6 +42,6 @@ class ButtonThread(threading.Thread):
                 if(self.startTime):
                     if(time.time()-self.startTime > 2):
                         print "Turn Off!"
-                        self.queue.put("<off>")
+                        self.queue.put(("<off>",True))
                         self.startTime = None
                 time.sleep(0.01)

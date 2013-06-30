@@ -17,7 +17,7 @@ class MoodBoxHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         if(self.path == "/"):
             self.send_response(200)
             self.end_headers()
-            messageQueue.put("Recieved!!")
+            messageQueue.put(("Recieved!!",False))
             self.wfile.write("<b>Hello!</b>")
         else:
             self.send_error(404)
@@ -32,7 +32,7 @@ class MoodBoxHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             key,value = m.groups()
             if(key.lower() == "setmood"):
                 print "Putting Value:",value
-                messageQueue.put(value)
+                messageQueue.put((value,False))
                 self.send_response(200)
                 self.end_headers()
                 self.wfile.write("success!")
