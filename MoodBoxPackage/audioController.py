@@ -22,7 +22,7 @@ class AudioController:
     # this function should be called when:
      # new playlist is selected
      # song ends
-    def songSelect(self):
+    def selectNextSong(self):
         path = "playlists/" + self.color 
         #song_selection = random.randint(1,3)
         song_selection = "1s"
@@ -49,13 +49,13 @@ class AudioController:
 
 
 
-def run(queue,moods):
-    if not queue.empty():
-        newmood = queue.get()
-        playlist.selectPlaylist(newmood)
-        playlist.selectSong()
-    elif not mixer.music.get_busy():
-        playlist.selectSong()
+# def run(queue,moods):
+#     if not queue.empty():
+#         newmood = queue.get()
+#         playlist.selectPlaylist(newmood)
+#         playlist.selectSong()
+#     elif not mixer.music.get_busy():
+#         playlist.selectSong()
 
 
 

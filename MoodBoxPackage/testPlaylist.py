@@ -3,9 +3,9 @@ from audioController import *
 
 print "test"
 
-list = AudioController()
-list.selectPlaylist("red")
-list.songSelect()
+playlist = AudioController()
+playlist.selectPlaylist("red")
+playlist.selectNextSong()
 
 while mixer.music.get_busy():
     pass
