@@ -42,7 +42,7 @@ class MoodThread(threading.Thread):
                         self.bulbLib1.setMood(mood)
                         self.bulbLib2.setMood(mood)
                         self.bulbLib3.setMood(mood)
-                        self.audio.selectPlaylist(newmood)
+                        self.audio.selectPlaylist(mood)
                         self.audio.selectNextSong()
                 elif (not pygame.mixer.music.get_busy() and (not self.audio.mood=="")):
                     self.audio.selectNextSong()
