@@ -7,13 +7,13 @@ from pygame import *
 
 class AudioController:
     'Class for playlist handling'
-    color = ""
 
     def selectPlaylist(self, playlist_color):
         self.color = playlist_color  
 
     def __init__(self):
         mixer.init()
+	self.color = ""
         os.environ["SDL_VIDEODRIVER"]="dummy"
         display.init()
         display.set_mode((1,1))
@@ -23,12 +23,12 @@ class AudioController:
      # new playlist is selected
      # song ends
     def selectNextSong(self):
-        path = "playlists/" + self.color 
-        #song_selection = random.randint(1,3)
-        song_selection = "1s"
-        #full_file_name = path + "/" + str(song_selection) + ".mp3"
-        full_file_name = path + "/" + song_selection + ".mp3"
-        #self.play(full_file_name)
+        path = "/home/pi/playlists/" + self.color 
+        song_selection = random.randint(1,3)
+        files = os.listdir(path)
+
+	index = random.randint(0,len(files) - 1 )
+        full_file_name = path + "/" + files[index] 
         self.play(full_file_name)
 
     
@@ -42,6 +42,7 @@ class AudioController:
         mixer.music.fadeout(500)
 
     def play(self, filename):
+	print "PLAYING MUSIC"
         if mixer.music.get_busy():
             self.stop()
         mixer.music.load(filename)

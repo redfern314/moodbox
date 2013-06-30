@@ -33,18 +33,20 @@ class MoodThread(threading.Thread):
             while(self.running):
                 if(not self.queue.empty()):
                     mood = self.queue.get()
+	            print mood
                     if(mood == "<off>"):
+                        self.audio.stop()
                         self.bulbLib1.bulbOff()
                         self.bulbLib2.bulbOff()
                         self.bulbLib3.bulbOff()
-                        self.audio.stop()
+			self.audio.color = ""
                     else:
+                        self.audio.selectPlaylist(mood)
+                        self.audio.selectNextSong()
                         self.bulbLib1.setMood(mood)
                         self.bulbLib2.setMood(mood)
                         self.bulbLib3.setMood(mood)
-                        self.audio.selectPlaylist(mood)
-                        self.audio.selectNextSong()
-                elif (not pygame.mixer.music.get_busy() and (not self.audio.mood=="")):
+                elif (not pygame.mixer.music.get_busy() and (not self.audio.color=="")):
                     self.audio.selectNextSong()
                 time.sleep(0.01)
                 
